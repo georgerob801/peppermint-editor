@@ -117,7 +117,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,16 +128,26 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\editor\windows\AssetViewer.cpp" />
+    <ClCompile Include="include\imgui\imgui_stdlib.cpp" />
+    <ClCompile Include="src\editor\serialisation\ComponentParameterRegister.cpp" />
+    <ClCompile Include="include\stb_image\stb_image.cpp" />
+    <ClCompile Include="src\editor\windows\Inspector.cpp" />
+    <ClCompile Include="src\editor\windows\PreviewWindow.cpp" />
+    <ClCompile Include="src\editor\windows\HierarchyViewer.cpp" />
+    <ClCompile Include="src\editor\windows\GUIWindow.cpp" />
+    <ClCompile Include="src\editor\managers\GUIManager.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />
     <ClCompile Include="include\imgui\imgui_demo.cpp" />
     <ClCompile Include="include\imgui\imgui_draw.cpp" />
@@ -147,25 +157,129 @@
     <ClCompile Include="include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\editor\managers\EditorManager.cpp" />
     <ClCompile Include="include\glad\glad.c" />
-    <ClCompile Include="src\editor\managers\LogManager.cpp" />
+    <ClCompile Include="src\editor\managers\EditorLogManager.cpp" />
     <ClCompile Include="peppermint-editor.cpp" />
-    <ClCompile Include="src\editor\Window.cpp" />
-    <ClCompile Include="src\editor\managers\WindowManager.cpp" />
+    <ClCompile Include="src\editor\EditorWindow.cpp" />
+    <ClCompile Include="src\editor\managers\EditorWindowManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\Asset.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\Component.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\Camera.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\PlayerController.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\renderers\AnimatedTilesetRenderer.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\renderers\BasicPlayerRenderer.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\renderers\Renderer.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\renderers\TextRenderer.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\renderers\TilesetRenderer.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\ScriptComponent.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\SoundListener.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\SoundSource.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\Transform.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\components\WarpTile.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\GameObject.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\game\TilesetAnimation.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\rendering\Mesh.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\rendering\RenderQueue.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\rendering\Shader.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\rendering\Text.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\rendering\Texture.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\rendering\TextureSet.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\rendering\Tileset.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\sound\SoundBufferManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\sound\SoundDevice.cpp" />
+    <ClCompile Include="src\peppermint-preview\classes\Window.cpp" />
+    <ClCompile Include="src\peppermint-preview\managers\AssetManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\managers\EngineManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\managers\InputManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\managers\LogManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\managers\RenderManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\managers\SoundManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\managers\WindowManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\managers\WorldManager.cpp" />
+    <ClCompile Include="src\peppermint-preview\scripts\ScriptTypes.cpp" />
+    <ClCompile Include="src\peppermint-preview\Serialisable.cpp" />
+    <ClCompile Include="src\editor\windows\WorldViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\editor\windows\AssetViewer.h" />
+    <ClInclude Include="include\editor\serialisation\ComponentParameterRegister.h" />
+    <ClInclude Include="include\editor\serialisation\GUIInfo.hpp" />
+    <ClInclude Include="include\editor\windows\HierarchyViewer.h" />
+    <ClInclude Include="include\editor\windows\GUIWindow.h" />
+    <ClInclude Include="include\editor\managers\GUIManager.h" />
     <ClInclude Include="include\editor\managers\EditorManager.h" />
     <ClInclude Include="include\editor\editor.h" />
-    <ClInclude Include="include\editor\managers\LogManager.h" />
-    <ClInclude Include="include\editor\Window.h" />
-    <ClInclude Include="include\editor\managers\WindowManager.h" />
+    <ClInclude Include="include\editor\managers\EditorLogManager.h" />
+    <ClInclude Include="include\editor\EditorWindow.h" />
+    <ClInclude Include="include\editor\managers\EditorWindowManager.h" />
     <ClInclude Include="include\imgui\imconfig.h" />
     <ClInclude Include="include\imgui\imgui.h" />
     <ClInclude Include="include\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="include\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="include\imgui\imgui_internal.h" />
+    <ClInclude Include="include\imgui\imgui_stdlib.h" />
     <ClInclude Include="include\imgui\imstb_rectpack.h" />
     <ClInclude Include="include\imgui\imstb_textedit.h" />
     <ClInclude Include="include\imgui\imstb_truetype.h" />
+    <ClInclude Include="include\peppermint-preview\classes\Asset.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\Component.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\Camera.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\NavigableMap.hpp" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\PlayerController.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\renderers\AnimatedTilesetRenderer.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\renderers\BasicPlayerRenderer.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\renderers\Renderer.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\renderers\SpriteRenderer.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\renderers\TextRenderer.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\renderers\TilesetRenderer.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\ScriptComponent.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\SoundListener.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\SoundSource.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\Transform.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\components\WarpTile.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\GameObject.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\TilesetAnimation.h" />
+    <ClInclude Include="include\peppermint-preview\classes\game\Toggleable.hpp" />
+    <ClInclude Include="include\peppermint-preview\classes\rendering\Mesh.h" />
+    <ClInclude Include="include\peppermint-preview\classes\rendering\RenderQueue.h" />
+    <ClInclude Include="include\peppermint-preview\classes\rendering\Shader.h" />
+    <ClInclude Include="include\peppermint-preview\classes\rendering\Text.h" />
+    <ClInclude Include="include\peppermint-preview\classes\rendering\Texture.h" />
+    <ClInclude Include="include\peppermint-preview\classes\rendering\TextureSet.h" />
+    <ClInclude Include="include\peppermint-preview\classes\rendering\Tileset.h" />
+    <ClInclude Include="include\peppermint-preview\classes\rendering\TilesetAnimationStateInfomation.hpp" />
+    <ClInclude Include="include\peppermint-preview\classes\sound\ALErrorCheck.hpp" />
+    <ClInclude Include="include\peppermint-preview\classes\sound\SoundBufferManager.h" />
+    <ClInclude Include="include\peppermint-preview\classes\sound\SoundDevice.h" />
+    <ClInclude Include="include\peppermint-preview\classes\Window.h" />
+    <ClInclude Include="include\peppermint-preview\Exceptions.hpp" />
+    <ClInclude Include="include\peppermint-preview\managers\AssetManager.h" />
+    <ClInclude Include="include\peppermint-preview\managers\EngineManager.h" />
+    <ClInclude Include="include\peppermint-preview\managers\InputManager.h" />
+    <ClInclude Include="include\peppermint-preview\managers\LogManager.h" />
+    <ClInclude Include="include\peppermint-preview\managers\RenderManager.h" />
+    <ClInclude Include="include\peppermint-preview\managers\SoundManager.h" />
+    <ClInclude Include="include\peppermint-preview\managers\WindowManager.h" />
+    <ClInclude Include="include\peppermint-preview\managers\WorldManager.h" />
+    <ClInclude Include="include\peppermint-preview\peppermint.h" />
+    <ClInclude Include="include\peppermint-preview\scripts\ScriptTypes.hpp" />
+    <ClInclude Include="include\peppermint-preview\scripts\TestComponent.h" />
+    <ClInclude Include="include\peppermint-preview\Serialisable.h" />
+    <ClInclude Include="include\editor\windows\PreviewWindow.h" />
+    <ClInclude Include="include\editor\windows\Inspector.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="include\editor\windows\WorldViewer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="peppermint-editor.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\img\window-icon-small.png" />
+    <Image Include="resource\img\window-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\shader\frag\outline.frag" />
+    <None Include="resource\shader\vert\outline.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

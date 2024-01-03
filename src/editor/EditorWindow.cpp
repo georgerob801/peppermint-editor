@@ -1,11 +1,11 @@
-#include <editor/Window.h>
+#include <editor/EditorWindow.h>
 
-#include <editor/managers/LogManager.h>
+#include <editor/managers/EditorLogManager.h>
 
 #include <format>
 
 typedef editor::Window w;
-typedef editor::managers::LogManager lm;
+typedef editor::managers::LogManager LogManager;
 
 void onResize(GLFWwindow* win, int width, int height) {
 	glfwMakeContextCurrent(win);
@@ -16,24 +16,22 @@ void onResize(GLFWwindow* win, int width, int height) {
 w::Window(int width, int height, string title, GLFWmonitor* monitor, GLFWwindow* share) {
 	this->status = 0;
 
-	lm::debug(format("Attempting to create {}x{} window titled '{}'", width, height, title));
+	LogManager::debug(format("Attempting to create {}x{} window titled '{}'", width, height, title));
 
 	this->glfwWindow = glfwCreateWindow(width, height, title.c_str(), monitor, share);
 
 	if (this->glfwWindow == nullptr) {
-		lm::critical("Failed to create GLFW window");
+		LogManager::critical("Failed to create GLFW window");
 		this->status = -1;
 	} else {
-		lm::info(format("Created '{}' window successfully at {} for editor::Window at {}", title, (void*)this->glfwWindow, (void*)this));
+		LogManager::info(format("Created '{}' window successfully at {} for editor::Window at {}", title, (void*)this->glfwWindow, (void*)this));
 
-		lm::debug(format("Setting resize handler for {}", (void*)this));
+		LogManager::debug(format("Setting resize handler for {}", (void*)this));
 		int size[2];
 		this->getSize(size);
 		onResize(this->glfwWindow, size[0], size[1]);
 		glfwSetFramebufferSizeCallback(this->glfwWindow, onResize);
 	}
-
-
 }
 
 w::~Window() {

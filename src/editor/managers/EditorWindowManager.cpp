@@ -1,4 +1,4 @@
-#include <editor/managers/WindowManager.h>
+#include <editor/managers/EditorWindowManager.h>
 
 using namespace editor;
 
@@ -6,7 +6,7 @@ typedef editor::managers::WindowManager wm;
 
 int wm::status = 0;
 int wm::defaultWidth = 800;
-int wm::defaultHeight = 800;
+int wm::defaultHeight = 450;
 
 string wm::defaultTitle = "peppermint editor";
 
@@ -42,4 +42,13 @@ Window* wm::createWindow(int width, int height, string title, GLFWmonitor* monit
 	wm::windows.push_back(window);
 
 	return window;
+}
+
+void wm::setCurrentWindow(Window* win) {
+	win->makeContextCurrent();
+	wm::currentWindow = win;
+}
+
+Window* wm::getWindow() {
+	return wm::currentWindow;
 }

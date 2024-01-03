@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include <editor/Window.h>
+#include <editor/EditorWindow.h>
 
 #include <GLFW/glfw3.h>
 
@@ -33,7 +33,7 @@ namespace editor {
 			static Window* createWindow(int width, int height, string title);
 			static Window* createWindow(int width, int height, string title, GLFWmonitor* monitor, GLFWwindow* share);
 
-			static void setCurrentWindow();
+			static void setCurrentWindow(Window* win);
 			static Window* getWindow();
 		private:
 			static Window* currentWindow;

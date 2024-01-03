@@ -7,6 +7,17 @@ namespace editor {
 		public:
 			static void initialise();
 			static void destroy();
+
+			static void loop();
+
+			static void updateDeltaTime();
+			
+			static int status;
+
+			static double deltaTime;
+			static double desiredFramerate;
+		private:
+			static double lastFrame;
 		};
 	}
 }

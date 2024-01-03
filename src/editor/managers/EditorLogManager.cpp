@@ -1,4 +1,4 @@
-#include <editor/managers/LogManager.h>
+#include <editor/managers/EditorLogManager.h>
 
 #include <chrono>
 #include <iostream>

@@ -2,7 +2,8 @@
 #define PPMINT_EDITOR_H
 
 #include <editor/managers/EditorManager.h>
-#include <editor/managers/WindowManager.h>
-#include <editor/managers/LogManager.h>
+#include <editor/managers/EditorWindowManager.h>
+#include <editor/managers/GUIManager.h>
+#include <editor/managers/EditorLogManager.h>
 
 #endif
